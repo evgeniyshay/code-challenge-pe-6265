@@ -1,0 +1,25 @@
+.App-top-bar {
+  min-height: 40vh;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.App-top-bar input {
+  min-width: 250px;
+}
+
+.App-top-bar button {
+  margin-left: 15px;
+}
+
+.App-top-bar .add-button {
+  background-color: #00c875;
+  border-color: #00c875;
+}
+
+.App-top-bar .delete-button {
+  background-color: #e44258;
+  border-color: #e44258;
+}
