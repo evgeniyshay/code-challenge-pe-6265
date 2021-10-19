@@ -1,6 +1,7 @@
-import "./Content.css";
+import PropTypes from "prop-types";
+import "./style.css";
 
-function Content({ isLoading, isInDictionary, searchKey }) {
+const Content = ({ isLoading, isInDictionary, searchKey }) => {
   let contentText = "";
   let contentClass = "basic";
 
@@ -19,6 +20,12 @@ function Content({ isLoading, isInDictionary, searchKey }) {
       {!isLoading ? contentText : "Loading..."}
     </div>
   );
-}
+};
+
+Content.propTypes = {
+  isLoading: PropTypes.bool,
+  isInDictionary: PropTypes.bool,
+  searchKey: PropTypes.string,
+};
 
 export default Content;

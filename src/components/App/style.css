@@ -1,0 +1,10 @@
+.App {
+  background-color: #292f4c;
+  color: white;
+  text-align: center;
+  padding: 1em;
+}
+
+.App-footer {
+  min-height: 10vh;
+}

@@ -1,7 +1,16 @@
 import { useEffect, useRef } from "react";
-import "./Header.css";
+import PropTypes from "prop-types";
 
-function Header({ searchKey, searchChangeHandler, isInDictionary, dispatch }) {
+import { ADD_WORD, DELETE_WORD } from "reducers/state";
+
+import "./style.css";
+
+const Header = ({
+  searchKey,
+  searchChangeHandler,
+  isInDictionary,
+  dispatch,
+}) => {
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -22,7 +31,7 @@ function Header({ searchKey, searchChangeHandler, isInDictionary, dispatch }) {
         <button
           className="add-button"
           data-testid="add-button"
-          onClick={() => dispatch({ type: "add", data: searchKey })}
+          onClick={() => dispatch({ type: ADD_WORD, data: searchKey })}
         >
           Add
         </button>
@@ -31,13 +40,20 @@ function Header({ searchKey, searchChangeHandler, isInDictionary, dispatch }) {
         <button
           className="delete-button"
           data-testid="delete-button"
-          onClick={() => dispatch({ type: "delete", data: searchKey })}
+          onClick={() => dispatch({ type: DELETE_WORD, data: searchKey })}
         >
           Delete
         </button>
       )}
     </div>
   );
-}
+};
+
+Header.propTypes = {
+  searchKey: PropTypes.string,
+  searchChangeHandler: PropTypes.func,
+  isInDictionary: PropTypes.bool,
+  dispatch: PropTypes.func,
+};
 
 export default Header;
