@@ -10,6 +10,7 @@ const App = () => {
     state,
     searchKey,
     isLoading,
+    progress,
     isInDictionary,
     searchChangeHandler,
     dispatch,
@@ -31,7 +32,7 @@ const App = () => {
       <div data-testid="footer" className="App-footer">
         {!isLoading
           ? `Total dictionary words count: ${state.size}`
-          : "Loading..."}
+          : `Loading... ${progress}%`}
       </div>
     </div>
   );

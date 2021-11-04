@@ -1,9 +1,8 @@
 import { useState, useEffect, useReducer } from "react";
 
 import reducer, { INIT_DICTIONARY } from "reducers/state";
+import { fetchDictionaryData } from "services/server";
 import { getLocalDictionary, updateLocalDictionary } from "services/storage";
-
-import dictionary from "data/dictionary.txt";
 
 const initialState = new Set();
 
@@ -11,16 +10,14 @@ const useSearch = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [searchKey, setSearchKey] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
   const [isInDictionary, setIsInDictionary] = useState(null);
 
   useEffect(() => {
     const fetchDictionary = async () => {
-      const dictionaryFetch = await fetch(dictionary);
-      const dictionaryText = await dictionaryFetch.text();
+      const words = await fetchDictionaryData(setProgress);
 
-      const dictionarySet = new Set(dictionaryText.split("\n"));
-
-      dictionarySet.delete("");
+      const dictionarySet = new Set(words);
 
       dispatch({ type: INIT_DICTIONARY, data: dictionarySet });
 
@@ -37,6 +34,7 @@ const useSearch = () => {
         data: new Set(JSON.parse(localDictionary)),
       });
 
+      setProgress(100);
       setIsLoading(false);
     }
 
@@ -64,6 +62,7 @@ const useSearch = () => {
     state,
     searchKey,
     isLoading,
+    progress,
     isInDictionary,
     searchChangeHandler,
     dispatch,
